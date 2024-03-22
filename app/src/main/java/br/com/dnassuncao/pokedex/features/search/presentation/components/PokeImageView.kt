@@ -18,44 +18,38 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import br.com.dnassuncao.pokedex.R
 import br.com.dnassuncao.pokedex.core.PokemonCategory
 import br.com.dnassuncao.pokedex.ui.theme.Typography
 
 @Composable
-fun PokeType(
-    name: String,
+fun PokeImageView(
+    image: Int,
     category: PokemonCategory,
     modifier: Modifier = Modifier
 ) {
     Card(
         modifier = modifier,
-        shape = RoundedCornerShape(24.dp)
+        shape = RoundedCornerShape(12.dp)
     ) {
-        Row(
+        Box(
             modifier = Modifier
-                .background(category.color)
                 .padding(4.dp)
         ) {
-            Box(
+            Image(
+                painter = painterResource(id = category.icon),
                 modifier = Modifier
-                    .size(20.dp)
-                    .clip(CircleShape)
-                    .background(Color.White)
-            ) {
-                Image(
-                    painter = painterResource(id = category.icon),
-                    modifier = Modifier
-                        .size(10.dp)
-                        .align(Alignment.Center),
-                    contentDescription = ""
-                )
-            }
-            Text(
-                text = name,
+                    .size(50.dp)
+                    .align(Alignment.Center),
+                alpha = 0.2F,
+                contentDescription = ""
+            )
+            Image(
+                painter = painterResource(id = image),
                 modifier = Modifier
-                    .align(Alignment.CenterVertically)
-                    .padding(start = 4.dp),
-                style = Typography.labelSmall
+                    .size(25.dp)
+                    .align(Alignment.Center),
+                contentDescription = ""
             )
         }
     }
@@ -63,27 +57,27 @@ fun PokeType(
 
 @Preview
 @Composable
-private fun PokeTypeGrassPreview() {
-    PokeType(
-        name = "Grama",
+private fun PokeImageViewGrassPreview() {
+    PokeImageView(
+        image = R.drawable.bulbasaur,
         category = PokemonCategory.Grass
     )
 }
 
 @Preview
 @Composable
-private fun PokeTypeWaterPreview() {
-    PokeType(
-        name = "Água",
+private fun PokeImageViewWaterPreview() {
+    PokeImageView(
+        image = R.drawable.wartortle,
         category = PokemonCategory.Water
     )
 }
 
 @Preview
 @Composable
-private fun PokeTypeFirePreview() {
-    PokeType(
-        name = "Fogo",
+private fun PokeImageViewFirePreview() {
+    PokeImageView(
+        image = R.drawable.charizard,
         category = PokemonCategory.Fire
     )
 }
