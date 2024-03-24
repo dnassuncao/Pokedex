@@ -15,7 +15,7 @@ data class BottomNavigationItem(
                 title = "Pokedéx",
                 icon = R.drawable.ic_bottom_bar_home,
                 iconSelected = R.drawable.ic_bottom_bar_home_selected,
-                route = Screens.Home.route
+                route = Screens.Search.route
             ),
             BottomNavigationItem(
                 title = "Regions",

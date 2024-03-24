@@ -5,7 +5,6 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentWidth
@@ -14,17 +13,17 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.CompositingStrategy
-import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import br.com.dnassuncao.pokedex.R
 import br.com.dnassuncao.pokedex.core.PokemonCategory
+import coil.compose.AsyncImage
+import coil.request.ImageRequest
 
 @Composable
 fun PokeImageView(
-    image: Int,
+    image: String,
     category: PokemonCategory,
     modifier: Modifier = Modifier
 ) {
@@ -52,10 +51,13 @@ fun PokeImageView(
                     .align(Alignment.Center),
                 contentDescription = ""
             )
-            Image(
-                painter = painterResource(id = image),
+            AsyncImage(
+                model = ImageRequest.Builder(LocalContext.current)
+                    .data(image)
+                    .crossfade(true)
+                    .build(),
                 modifier = Modifier
-                    .size(35.dp)
+                    .size(55.dp)
                     .align(Alignment.Center),
                 contentDescription = ""
             )
@@ -67,7 +69,7 @@ fun PokeImageView(
 @Composable
 private fun PokeImageViewGrassPreview() {
     PokeImageView(
-        image = R.drawable.bulbasaur,
+        image = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/16.png",
         category = PokemonCategory.Grass
     )
 }
@@ -76,7 +78,7 @@ private fun PokeImageViewGrassPreview() {
 @Composable
 private fun PokeImageViewWaterPreview() {
     PokeImageView(
-        image = R.drawable.wartortle,
+        image = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/16.png",
         category = PokemonCategory.Water
     )
 }
@@ -85,7 +87,7 @@ private fun PokeImageViewWaterPreview() {
 @Composable
 private fun PokeImageViewFirePreview() {
     PokeImageView(
-        image = R.drawable.charizard,
+        image = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/16.png",
         category = PokemonCategory.Fire
     )
 }
