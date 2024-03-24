@@ -31,4 +31,12 @@ sealed class PokemonCategory(
         color = ColorFire,
         backgroundColor = ColorFireBackground
     )
+
+    companion object {
+        val values: List<PokemonCategory> = listOf(
+            Water,
+            Grass,
+            Fire
+        )
+    }
 }

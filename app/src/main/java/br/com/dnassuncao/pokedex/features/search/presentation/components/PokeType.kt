@@ -23,7 +23,6 @@ import br.com.dnassuncao.pokedex.ui.theme.Typography
 
 @Composable
 fun PokeType(
-    name: String,
     category: PokemonCategory,
     modifier: Modifier = Modifier
 ) {
@@ -51,7 +50,7 @@ fun PokeType(
                 )
             }
             Text(
-                text = name,
+                text = category.toString(),
                 modifier = Modifier
                     .align(Alignment.CenterVertically)
                     .padding(start = 4.dp),
@@ -65,7 +64,6 @@ fun PokeType(
 @Composable
 private fun PokeTypeGrassPreview() {
     PokeType(
-        name = "Grama",
         category = PokemonCategory.Grass
     )
 }
@@ -74,7 +72,6 @@ private fun PokeTypeGrassPreview() {
 @Composable
 private fun PokeTypeWaterPreview() {
     PokeType(
-        name = "Água",
         category = PokemonCategory.Water
     )
 }
@@ -83,7 +80,6 @@ private fun PokeTypeWaterPreview() {
 @Composable
 private fun PokeTypeFirePreview() {
     PokeType(
-        name = "Fogo",
         category = PokemonCategory.Fire
     )
 }
