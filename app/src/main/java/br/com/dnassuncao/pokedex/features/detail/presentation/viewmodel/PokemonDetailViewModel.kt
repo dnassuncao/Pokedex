@@ -16,9 +16,6 @@ class PokemonDetailViewModel(
     private val fetchPokemonUseCase: FetchPokemonUseCase
 ) : ViewModel() {
 
-//    private val _navigationChannel = Channel<PokemonDetailNavigationRequest>()
-//    val navigationRequest = _navigationChannel.receiveAsFlow()
-
     private val _uiState = MutableStateFlow(PokemonDetailUiState())
     val uiState: StateFlow<PokemonDetailUiState> = _uiState.asStateFlow()
 
@@ -30,7 +27,6 @@ class PokemonDetailViewModel(
 
     private fun handleOnInitScreenEvent(event: PokemonDetailUserEvent.OnInitScreen) {
         viewModelScope.launch {
-
             fetchPokemonUseCase(event.pokemonId)
                 .onError {
                     _uiState.update { currentState ->
