@@ -3,4 +3,5 @@ sealed class Screens(val route : String) {
     object Region : Screens("region_route")
     object Favorite : Screens("favorite_route")
     object Profile : Screens("profile_route")
+    object Detail : Screens("details/{pokemonId}")
 }

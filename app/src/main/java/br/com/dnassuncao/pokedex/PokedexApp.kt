@@ -2,6 +2,7 @@ package br.com.dnassuncao.pokedex
 
 import android.app.Application
 import br.com.dnassuncao.pokedex.core.network.networkModule
+import br.com.dnassuncao.pokedex.features.detail.di.detailModule
 import br.com.dnassuncao.pokedex.features.search.di.searchModule
 import org.koin.android.BuildConfig
 import org.koin.android.ext.koin.androidContext
@@ -23,7 +24,8 @@ class PokedexApp : Application() {
             modules(
                 arrayListOf(
                     networkModule,
-                    searchModule
+                    searchModule,
+                    detailModule
                 )
             )
         }

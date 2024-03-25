@@ -1,4 +1,4 @@
-package br.com.dnassuncao.pokedex.features.search.presentation.ui
+package br.com.dnassuncao.pokedex.features.search.presentation.screen
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize

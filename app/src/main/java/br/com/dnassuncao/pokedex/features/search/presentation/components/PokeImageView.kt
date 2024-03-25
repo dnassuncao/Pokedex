@@ -33,8 +33,7 @@ fun PokeImageView(
                 topStart = 12.dp,
                 bottomStart = 12.dp
             ))
-            .background(category.color)
-        ,
+            .background(category.color),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.Center
 

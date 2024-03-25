@@ -9,6 +9,7 @@ import br.com.dnassuncao.pokedex.ui.theme.ColorGrassBackground
 import br.com.dnassuncao.pokedex.ui.theme.ColorWater
 import br.com.dnassuncao.pokedex.ui.theme.ColorWaterBackground
 
+//TODO: Add all categories
 sealed class PokemonCategory(
     val icon: Int,
     val color: Color,

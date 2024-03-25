@@ -4,15 +4,20 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.cachedIn
 import br.com.dnassuncao.pokedex.features.search.domain.usecase.SearchPokemonUseCase
+import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 class SearchPokemonViewModel(
     private val searchPokemonUseCase: SearchPokemonUseCase
 ) : ViewModel() {
+
+    private val _navigationChannel = Channel<SearchPokemonNavigationRequest>()
+    val navigationRequest = _navigationChannel.receiveAsFlow()
 
     private val _uiState = MutableStateFlow(SearchPokemonState())
     val uiState: StateFlow<SearchPokemonState> = _uiState.asStateFlow()
@@ -26,7 +31,11 @@ class SearchPokemonViewModel(
 
     private fun handleClickedOnPokemon(event: SearchPokemonUserEvent.OnItemClick) {
         viewModelScope.launch {
-            // Navigate to Pokemon details
+            _navigationChannel.send(
+                SearchPokemonNavigationRequest.PokemonDetailScreen(
+                    pokemonId = event.pokemonId.toString(),
+                )
+            )
         }
     }
 
