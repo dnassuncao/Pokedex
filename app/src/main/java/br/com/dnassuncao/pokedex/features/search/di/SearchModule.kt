@@ -13,7 +13,9 @@ import retrofit2.Retrofit
 val searchModule = module {
 
     factory {
-        providePokemonSearchApi(get())
+        providePokemonSearchApi(
+            retrofit = get()
+        )
     }
 
     single<SearchPokemonUseCase> {
@@ -23,11 +25,15 @@ val searchModule = module {
     }
 
     single<SearchPokemonRepository> {
-        SearchPokemonRepositoryImpl(get())
+        SearchPokemonRepositoryImpl(
+            pokemonSearchApi = get()
+        )
     }
 
     viewModel {
-        SearchPokemonViewModel(get())
+        SearchPokemonViewModel(
+            searchPokemonUseCase = get()
+        )
     }
 
 }
