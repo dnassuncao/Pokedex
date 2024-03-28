@@ -1,7 +1,14 @@
+import java.io.FileInputStream
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
 }
+
+val keystorePropertiesFile = rootProject.file("keystore.properties")
+val keystoreProperties = Properties()
+keystoreProperties.load(FileInputStream(keystorePropertiesFile))
 
 android {
     namespace = "br.com.dnassuncao.pokedex"
@@ -20,14 +27,12 @@ android {
         }
     }
 
-    // TODO: Move signingConfigs data to CI/CD?
     signingConfigs {
         create("release") {
-            keyAlias = "pokedex"
-            keyPassword = "2846825"
-            //TODO: Remove the key on github, it's just there to run the test
-            storeFile = file("${rootDir}/app_key")
-            storePassword = "2846825"
+            keyAlias = keystoreProperties["keyAlias"] as String
+            keyPassword = keystoreProperties["keyPassword"] as String
+            storeFile = file(keystoreProperties["storeFile"] as String)
+            storePassword = keystoreProperties["storePassword"] as String
         }
     }
 
