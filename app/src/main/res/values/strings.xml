@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Pokedex</string>
+    <string name="error_load_data">Error to load data</string>
 </resources>
