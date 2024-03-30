@@ -9,18 +9,31 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import br.com.dnassuncao.pokedex.bottomnav.BottomNavigationBar
 import br.com.dnassuncao.pokedex.bottomnav.NavigationGraph
+import br.com.dnassuncao.pokedex.bottomnav.currentRoute
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
 fun MainScreen(navController: NavHostController) {
+
+    val shouldShowBottomNavigation = when (currentRoute(navController)) {
+        Screens.Search.route,
+        Screens.Region.route,
+        Screens.Favorite.route,
+        Screens.Profile.route,
+        -> true
+        else -> false
+    }
+
     Scaffold(
         bottomBar = {
-            BottomNavigationBar(navController = navController)
+            if (shouldShowBottomNavigation) {
+                BottomNavigationBar(navController = navController)
+            }
         }
     ) {
-        Box (
+        Box(
             modifier = Modifier.padding(it)
-        ){
+        ) {
             NavigationGraph(navController = navController)
         }
     }

@@ -18,18 +18,14 @@ fun BottomNavigationBar(
     navController: NavController
 ) {
     NavigationBar {
-        val navBackStackEntry by navController.currentBackStackEntryAsState()
-        val currentRoute = navBackStackEntry?.destination?.route
-
         BottomNavigationItem().bottomNavigationItems().forEachIndexed {index, navigationItem ->
-            val selected = currentRoute == navigationItem.route
+            val selected = currentRoute(navController) == navigationItem.route
             NavigationBarItem(
                 selected = selected,
                 alwaysShowLabel = false,
                 label = {
                     Text(navigationItem.title)
                 },
-                //TODO: Fix icons theme colors
                 icon = {
                     Icon(
                         imageVector = ImageVector.vectorResource(
@@ -40,12 +36,24 @@ fun BottomNavigationBar(
                 },
                 onClick = {
                     navController.navigate(navigationItem.route) {
+                        navController.graph.startDestinationRoute?.let { route ->
+                            popUpTo(route) {
+                                saveState = true
+                            }
+                        }
                         launchSingleTop = true
+                        restoreState = true
                     }
                 }
             )
         }
     }
+}
+
+@Composable
+fun currentRoute(navController: NavController): String? {
+    val navBackStackEntry by navController.currentBackStackEntryAsState()
+    return navBackStackEntry?.destination?.route
 }
 
 @Preview
